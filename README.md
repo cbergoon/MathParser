@@ -1,7 +1,7 @@
 # MathParser
 Recursive Decent Parser for basic mathematic expressions.
 
-# Grammar 
+## Grammar 
 ```
   [expr]      -> 	[term] | [term] "+" [expr] | [variable] "=" [expr]
   [term]      ->    [factor] | [factor] * [term]
