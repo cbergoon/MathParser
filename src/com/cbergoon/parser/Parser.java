@@ -85,12 +85,6 @@ class Parser {
         double res;
         if(lxan.next_t.equals(LexicalAnalyzer.token_type.NUMBER)){
             double tmp = constant();
-//            int tmp = Integer.parseInt(lxan.next_l);
-//            lxan.advance();
-//            while(lxan.next_t.equals(LexicalAnalyzer.token_type.NUMBER)){ // Consecutive digits into one number; move to constant/digit rule in future
-//                tmp = (tmp * 10) + Integer.parseInt(lxan.next_l);
-//                lxan.advance();
-//            }
             res = tmp;
         }else if(lxan.next_t.equals(LexicalAnalyzer.token_type.RPAR)){ // Right paren cannot appear before left
             synError();
@@ -127,7 +121,6 @@ class Parser {
 
         double t = factor(); // Build and walk down tree for first token
         res = t;
-//        lxan.advance();
         while(lxan.next_t == LexicalAnalyzer.token_type.STAR){ //RHS expected
             LexicalAnalyzer.token_type control = lxan.next_t;
             lxan.advance(); // Get next symbol
@@ -182,7 +175,6 @@ class Parser {
                 }
             }
         }else{
-            //lxan.advance();
             double t = term(); // Build and walk down tree for first token
             res = t;
 

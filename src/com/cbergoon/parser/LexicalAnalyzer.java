@@ -44,7 +44,6 @@ class LexicalAnalyzer {
             }
         }
         advance(); // Move to first token
-        //current_position = 0;
     }
     
     // Function Name: advance
