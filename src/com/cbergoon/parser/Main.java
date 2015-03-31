@@ -32,7 +32,7 @@ public class Main {
         while (input.compareTo("") != 0){ // Empty string to exit
             p = new Parser(input, globals);  // Initialize parser with input from stdin
             res = p.solve(); // Call wrapper to production rules to evaluate
-            if(p.getLexError()){
+            if(p.getLexError()){ // Log errors 
                 System.out.print("Lexical Error at position " + p.getLexErrorPosition() + "\n"); // Print tokenized input on error
                 String tmp = "";
                 for(String st : p.getLexemes()){
@@ -44,7 +44,7 @@ public class Main {
                 }
                 System.out.println("^");
                 System.out.println(p.getDump());
-            }else if(p.getSynError()){
+            }else if(p.getSynError()){ // Log errors
                 System.out.print("Syntax Error at position " + p.getSynErrorPosition() + "\n"); // Print tokenized input on error
                 String tmp = "";
                 for(String st : p.getLexemes()){
