@@ -8,7 +8,7 @@ import java.util.ArrayList;
 class Parser {
 
     // Function Name: Parser
-    // Purpose: Constructor
+    // Purpose: Constructor 
     // Params: eqa - String containing the equation
     // Pre: None
     // Post: LexicalAnalyzer initialized, flags cleared
@@ -22,10 +22,10 @@ class Parser {
         var_y = gl.get(1);
         var_z = gl.get(2);
     }
-
-    // Function Name: solve
+    
+    // Function Name: solve 
     // Purpose: Wrapper for first production rules
-    // Params: None
+    // Params: None 
     // Pre: Initialized parser class
     // Post: Returns result of equation
     public double solve(){
@@ -76,10 +76,10 @@ class Parser {
         return var;
     }
 
-    // Function Name: Factor
-    // Purpose: Factor Production rule
-    // Params: None
-    // Pre: Initialized parser, called by expr
+    // Function Name: Factor 
+    // Purpose: Factor Production rule 
+    // Params: None 
+    // Pre: Initialized parser, called by expr 
     // Post: Advance toward result in tree
     private double factor() {
         double res;
@@ -116,18 +116,18 @@ class Parser {
         }
         return res;
     }
-
-    // Function Name: term
-    // Purpose: Term Production rule
-    // Params: None
-    // Pre: Initialized parser, called by expr
+    
+    // Function Name: term 
+    // Purpose: Term Production rule 
+    // Params: None 
+    // Pre: Initialized parser, called by expr 
     // Post: Advance toward result in tree
     private double term(){
         double res;
 
         double t = factor(); // Build and walk down tree for first token
         res = t;
-
+//        lxan.advance();
         while(lxan.next_t == LexicalAnalyzer.token_type.STAR){ //RHS expected
             LexicalAnalyzer.token_type control = lxan.next_t;
             lxan.advance(); // Get next symbol
@@ -138,11 +138,11 @@ class Parser {
         }
         return res;
     }
-
-    // Function Name: expr
-    // Purpose: Expression Production rule
-    // Params: None
-    // Pre: Initialized parser, called by solve
+    
+    // Function Name: expr 
+    // Purpose: Expression Production rule 
+    // Params: None 
+    // Pre: Initialized parser, called by solve 
     // Post: Advance toward result in tree
     private double expr(){
         double res = 0;
@@ -168,25 +168,25 @@ class Parser {
                 res = t;
             }else{
                 lxan.reverse();
-                lxan.reverse();
+
                 t = term(); // Build and walk down tree for first token
                 res = t;
-                lxan.advance();
 
                 while(lxan.next_t == LexicalAnalyzer.token_type.PLUS){ // RHS Expected
                     LexicalAnalyzer.token_type control = lxan.next_t;
                     lxan.advance(); // Get next symbol
-                    t = term(); // Walk tree for right hand side of expression
+                    t = expr(); // Walk tree for right hand side of expression
                     if(control == LexicalAnalyzer.token_type.PLUS){ // Add. Easily add subtraction with else if
                         res = res + t;
                     }
                 }
             }
         }else{
+            //lxan.advance();
             double t = term(); // Build and walk down tree for first token
             res = t;
 
-            while(lxan.next_t == LexicalAnalyzer.token_type.PLUS || lxan.next_t == LexicalAnalyzer.token_type.VARIABLE){ // RHS Expected
+            while(lxan.next_t == LexicalAnalyzer.token_type.PLUS){ // RHS Expected
                 LexicalAnalyzer.token_type control = lxan.next_t;
                 lxan.advance(); // Get next symbol
                 if(control == LexicalAnalyzer.token_type.PLUS){ // Add. Easily add subtraction with else if
@@ -228,7 +228,7 @@ class Parser {
     public boolean getLexError(){
         return lexical_error;
     }
-
+    
     // Function Name: getSynError
     // Purpose: Getter for error flag
     // Params: None
@@ -255,7 +255,7 @@ class Parser {
     public int getLexErrorPosition(){
         return lex_error_position;
     }
-
+    
     // Function Name: lexError
     // Purpose: Set error flag true
     // Params: None
@@ -265,7 +265,7 @@ class Parser {
         lexical_error = true;
         lex_error_position = lxan.getCurrentPosition();
     }
-
+    
     // Function Name: synError
     // Purpose: Set error flag true
     // Params: None
@@ -275,7 +275,7 @@ class Parser {
         syntax_error = true;
         syn_error_position = lxan.getCurrentPosition();
     }
-
+    
     // Function Name: getDump
     // Purpose: Get token dump string from LA
     // Params: None

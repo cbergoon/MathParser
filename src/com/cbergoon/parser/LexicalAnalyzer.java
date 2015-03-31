@@ -20,8 +20,8 @@ class LexicalAnalyzer {
 
     // Function Name: LexicalAnalyzer
     // Purpose: Default constructor - Inits class to empty string
-    // Params:
-    // Pre: None
+    // Params: 
+    // Pre: None 
     // Post: Lexical analyzer with no lexemes at end of file condition
     public LexicalAnalyzer(){
         SYMBOLS = "+*()=";
@@ -44,8 +44,9 @@ class LexicalAnalyzer {
             }
         }
         advance(); // Move to first token
+        //current_position = 0;
     }
-
+    
     // Function Name: advance
     // Purpose: Advances the 'pointer' to the next lexeme if available, else end of file condition
     // Params: None
@@ -58,7 +59,7 @@ class LexicalAnalyzer {
             return;
         }
 
-        next_l = lexemes.get(current_position++); // Get the next lexeme to evaluate
+        next_l = lexemes.get(++current_position); // Get the next lexeme to evaluate
 
         // Determine token type
         if(next_l.compareTo("+") == 0){
@@ -88,7 +89,7 @@ class LexicalAnalyzer {
             return;
         }
 
-        current_position -= 1;
+        current_position = current_position - 1;
 
         next_l = lexemes.get(current_position); // Get the next lexeme to evaluate
 
@@ -122,18 +123,18 @@ class LexicalAnalyzer {
     // Function Name: validChar
     // Purpose: Test if a given terminal is part of the language.
     // Params: c - Character to test
-    // Pre: None
+    // Pre: None 
     // Post: True if is part of language, false otherwise
     public boolean validChar(char c){
         //True if character is in language
         return (c >= 'x' && c <= 'z') || (c >= '0' && c <= '9') || (c == '+') || (c == '*') || (c == '(') || (c == ')') || (c == '=');
     }
-
+    
     // Function Name: endOfTokens
-    // Purpose: Test if tokens are remaining
+    // Purpose: Test if tokens are remaining 
     // Params: None
     // Pre: None
-    // Post: Return true if no tokens, otherwise false
+    // Post: Return true if no tokens, otherwise false 
     public boolean endOfTokens(){
         if(current_position == lexemes.size()){
             return true;
@@ -141,7 +142,7 @@ class LexicalAnalyzer {
             return false;
         }
     }
-
+    
     // Function Name: getDump
     // Purpose: String for errors
     // Params: None
@@ -170,10 +171,20 @@ class LexicalAnalyzer {
         return tmp;
     }
 
+    // Function Name: getCurrentPosition
+    // Purpose: Returns value of current position
+    // Params: None
+    // Pre: None
+    // Post: Returns current position 
     public int getCurrentPosition(){
         return current_position;
     }
 
+    // Function Name: getLexemes
+    // Purpose: Returns the current lexemes
+    // Params: None
+    // Pre: None
+    // Post: Returns array list of tokens 
     public ArrayList<String> getLexemes(){
         return lexemes;
     }
